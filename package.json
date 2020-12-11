@@ -1,0 +1,9 @@
+{
+  "name": "mvc-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "jQuery": "^1.7.4"
+  }
+}
