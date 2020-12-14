@@ -8902,9 +8902,12 @@ var _jQuery = _interopRequireDefault(require("jQuery"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//数据相关都放到 m
+//视图相关都放到 v
+//其他都放到 c
 //初始化html
 var html = "\n  <section id=\"app1\">\n  <div class=\"output\">\n    <span id=\"number\">100</span>\n  </div>\n  <div class=\"actions\">\n    <button id=\"add1\">+1</button>\n    <button id=\"minus1\">-1</button>\n    <button id=\"mul2\">\xD72</button>\n    <button id=\"divide2\">\xF72</button>\n  </div>\n  </section>\n";
-var $element = (0, _jQuery.default)(html).prependTo((0, _jQuery.default)("body > .page")); //寻找重要数据
+var $element = (0, _jQuery.default)(html).prependTo((0, _jQuery.default)("body > .page")); //寻找重要元素
 
 var $number = (0, _jQuery.default)("#number");
 var $button1 = (0, _jQuery.default)("#add1");

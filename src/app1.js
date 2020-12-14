@@ -1,6 +1,10 @@
 import "./app1.css";
 import $ from "jQuery";
 
+//数据相关都放到 m
+//视图相关都放到 v
+//其他都放到 c
+
 //初始化html
 const html = `
   <section id="app1">
@@ -17,7 +21,7 @@ const html = `
 `;
 const $element = $(html).prependTo($("body > .page"));
 
-//寻找重要数据
+//寻找重要元素
 const $number = $("#number");
 const $button1 = $("#add1");
 const $button2 = $("#minus1");
