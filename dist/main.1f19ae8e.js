@@ -194,6 +194,11 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
+},{"_css_loader":"C:/Users/asus/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/css-loader.js"}],"app1.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
 },{"_css_loader":"C:/Users/asus/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/css-loader.js"}],"../node_modules/jQuery/lib/node-jquery.js":[function(require,module,exports) {
 var define;
 (function () {
@@ -8888,12 +8893,7 @@ var define;
   module.exports = create('undefined' === typeof window ? undefined : window);
   module.exports.create = create;
 })();
-},{}],"app1.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"C:/Users/asus/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/css-loader.js"}],"app1.js":[function(require,module,exports) {
+},{}],"app1.js":[function(require,module,exports) {
 "use strict";
 
 require("./app1.css");
@@ -8902,13 +8902,20 @@ var _jQuery = _interopRequireDefault(require("jQuery"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//初始化html
+var html = "\n  <section id=\"app1\">\n  <div class=\"output\">\n    <span id=\"number\">100</span>\n  </div>\n  <div class=\"actions\">\n    <button id=\"add1\">+1</button>\n    <button id=\"minus1\">-1</button>\n    <button id=\"mul2\">\xD72</button>\n    <button id=\"divide2\">\xF72</button>\n  </div>\n  </section>\n";
+var $element = (0, _jQuery.default)(html).prependTo((0, _jQuery.default)("body > .page")); //寻找重要数据
+
 var $number = (0, _jQuery.default)("#number");
 var $button1 = (0, _jQuery.default)("#add1");
 var $button2 = (0, _jQuery.default)("#minus1");
 var $button3 = (0, _jQuery.default)("#mul2");
-var $button4 = (0, _jQuery.default)("#divide2");
-var n = localStorage.getItem("n");
-$number.text(n || 100);
+var $button4 = (0, _jQuery.default)("#divide2"); //初始化数据
+
+var n = localStorage.getItem("n"); //将数据渲染到页面
+
+$number.text(n || 100); //绑定鼠标事件
+
 $button1.on("click", function () {
   var n = parseInt($number.text());
   n += 1;
@@ -8947,17 +8954,22 @@ var _jQuery = _interopRequireDefault(require("jQuery"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var html = "\n  <section id=\"app2\">\n  <ol class=\"tab-bar\">\n    <li><span>1</span></li>\n    <li><span>2</span></li>\n  </ol>\n  <ol class=\"tab-content\">\n    <li>\u5185\u5BB91</li>\n    <li>\u5185\u5BB92</li>\n  </ol>\n  </section>\n";
+var $element = (0, _jQuery.default)(html).appendTo((0, _jQuery.default)("body>.page"));
 var $tabBar = (0, _jQuery.default)("#app2 .tab-bar");
-var $tabContent = (0, _jQuery.default)("#app2 .tab-content"); //事件委托
+var $tabContent = (0, _jQuery.default)("#app2 .tab-content");
+var localKey = "app2.index";
+var index = localStorage.getItem(localKey); //事件委托
 
 $tabBar.on("click", "li", function (e) {
   var $li = (0, _jQuery.default)(e.currentTarget);
   $li.addClass("selected").siblings().removeClass("selected");
   var index = $li.index(); //被点击的 li 的下标
 
+  localStorage.setItem(localKey, index);
   $tabContent.children().eq(index).addClass("active").siblings().removeClass("active");
 });
-$tabBar.children().eq(0).trigger("click");
+$tabBar.children().eq(index).trigger("click");
 },{"./app2.css":"app2.css","jQuery":"../node_modules/jQuery/lib/node-jquery.js"}],"app3.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
@@ -8972,9 +8984,27 @@ var _jQuery = _interopRequireDefault(require("jQuery"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var html = "\n  <section id=\"app3\">\n    <div class=\"square\"></div>\n  </section>\n";
+var $element = (0, _jQuery.default)(html).appendTo((0, _jQuery.default)("body>.page"));
 var $square = (0, _jQuery.default)("#app3 .square");
+var localKey = "app3.active"; // yes no undefined
+
+var active = localStorage.getItem(localKey) === "yes"; // if(active){
+//   $square.addClass('active')
+// } else {
+//   $square.removeClass('active')
+// }
+
+$square.toggleClass("active", active);
 $square.on("click", function () {
-  $square.toggleClass("active");
+  if ($square.hasClass("active")) {
+    $square.removeClass("active");
+    localStorage.setItem(localKey, "no");
+  } else {
+    $square.addClass("active");
+    localStorage.setItem(localKey, "yes");
+  } // $square.toggleClass("active");
+
 });
 },{"./app3.css":"app3.css","jQuery":"../node_modules/jQuery/lib/node-jquery.js"}],"app4.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -8990,6 +9020,8 @@ var _jQuery = _interopRequireDefault(require("jQuery"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var html = "\n  <section id=\"app4\">\n    <div class=\"circle\"></div>\n  </section>\n";
+var $element = (0, _jQuery.default)(html).appendTo((0, _jQuery.default)("body>.page"));
 var $circle = (0, _jQuery.default)("#app4 .circle");
 $circle.on("mouseenter", function () {
   $circle.addClass("active");
@@ -9003,8 +9035,6 @@ require("./reset.css");
 
 require("./global.css");
 
-var _jQuery = _interopRequireDefault(require("jQuery"));
-
 require("./app1.js");
 
 require("./app2.js");
@@ -9013,10 +9043,9 @@ require("./app3.js");
 
 require("./app4.js");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-console.log(_jQuery.default);
-},{"./reset.css":"reset.css","./global.css":"global.css","jQuery":"../node_modules/jQuery/lib/node-jquery.js","./app1.js":"app1.js","./app2.js":"app2.js","./app3.js":"app3.js","./app4.js":"app4.js"}],"C:/Users/asus/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+console.log('main.js'); // import $ from 'jQuery'
+// console.log($)
+},{"./reset.css":"reset.css","./global.css":"global.css","./app1.js":"app1.js","./app2.js":"app2.js","./app3.js":"app3.js","./app4.js":"app4.js"}],"C:/Users/asus/AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -9044,7 +9073,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61592" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57670" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
